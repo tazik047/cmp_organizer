@@ -192,7 +192,7 @@ Please, answer asap.
             </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login.html">Logout</a></li>
+                    <li><a class="logout" href="<?php print generateUrl('logout'); ?>">Logout</a></li>
             	</ul>
             </div>
         </header>
@@ -207,8 +207,8 @@ Please, answer asap.
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-              	  <p class="centered"><a href="profile.html"><img src="/Views/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">Marcel Newman</h5>
+              	  <p class="centered"><a href="<?php print generateUrl('profile'); ?>"><img src="/Views/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered"><?php print get_current_organizer_user()->email; ?></h5>
 
                   <li class="mt">
                       <a class="active" href="index.html">
@@ -663,8 +663,8 @@ Please, answer asap.
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-2014 - Alvarez.is
-              <a href="index.html#" class="go-top">
+2015 — Stanislav Zadorozhnii &copy;
+              <a href="#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -709,6 +709,10 @@ Please, answer asap.
             class_name: 'my-sticky-class'
         });
 
+		$('.go-top').click(function () {
+			$.scrollTo(0, 1000);
+		});
+		
         return false;
         });
 	</script>

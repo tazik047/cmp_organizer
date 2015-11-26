@@ -11,7 +11,7 @@ class Database
     var $connection;
 
     public function __construct(){
-        $this->connection = mysqli_connect('localhost','root','cnfybckfd') or die("Ошибка соединения с сервером");
+        $this->connection = mysqli_connect('localhost','root','') or die("Ошибка соединения с сервером");
         mysqli_select_db($this->connection, "organizer") or die("База данных не выбрана");
     }
 
