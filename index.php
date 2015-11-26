@@ -35,7 +35,7 @@ switch($_GET['action']){
 		}
 		else{
 			if($_GET['method']=='manage'){
-				$view_name = 'events_manage';
+				$view_name = 'profile_manage';
 			}
 		}
 		break;

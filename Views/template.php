@@ -211,7 +211,7 @@ Please, answer asap.
               	  <h5 class="centered"><?php print get_current_organizer_user()->email; ?></h5>
 
                   <li class="mt">
-                      <a class="active" href="<?php print generateUrl('home')?>">
+                      <a class="active" href="<?php print generateUrl('home'); ?>">
                           <i class="fa fa-dashboard"></i>
                           <span>Главная</span>
                       </a>
@@ -223,8 +223,8 @@ Please, answer asap.
                           <span>Мои события</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="<?php print generateUrl('eventtypes')?>">Просмотреть</a></li>
-                          <li><a  href="<?php print generateUrl('eventtypes','method=create')?>">Создать</a></li>
+                          <li><a  href="<?php print generateUrl('eventtypes'); ?>">Просмотреть</a></li>
+                          <li><a  href="<?php print generateUrl('eventtypes','method=create'); ?>">Создать</a></li>
                       </ul>
                   </li>
 
