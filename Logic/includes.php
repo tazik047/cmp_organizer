@@ -16,9 +16,9 @@ Include 'Logic/authorize.php';
  
 Include 'Logic/DataBase/Database.php';
 Include 'Logic/DataBase/UserRepository.php';
+Include 'Logic/DataBase/EventTypeRepository.php';
 
-$repo = new UserRepository();
-
-$GLOBALS['UserRepository'] = $repo;
+$GLOBALS['UserRepository'] = new UserRepository();
+$GLOBALS['EventTypeRepository'] = new EventTypeRepository();
 
 ?>
