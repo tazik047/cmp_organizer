@@ -16,6 +16,9 @@ if(!isset($_GET['action'])){
 $view_name = '';
 
 switch($_GET['action']){
+	case 'avatar':
+		get_avatar();
+		return;
 	case 'logout':
 		logout();
 		return;

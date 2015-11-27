@@ -207,7 +207,7 @@ Please, answer asap.
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-              	  <p class="centered"><a href="<?php print generateUrl('profile'); ?>"><img src="/Views/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="<?php print generateUrl('profile'); ?>"><img src="<?php print generateUrl('avatar'); ?>" class="img-circle" width="60"></a></p>
               	  <h5 class="centered"><?php print get_current_organizer_user()->email; ?></h5>
 
                   <li class="mt">

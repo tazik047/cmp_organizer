@@ -42,6 +42,21 @@ class UserRepository
 		$this->db->queryWithoutResult('insert into user(`Password`, `Email`) values("'.$user->password.'", "'.$user->email.'")');
 	}
 	
+	public function setAvatarType($id, $type){
+		$this->db->queryWithoutResult('UPDATE `user` SET `Content_type`="'.$type.'" WHERE UserId='.$id);
+	}
+	
+	public function getAvatarType($id){
+		$res = $this->db->query('SELECT `Content_type` FROM user where UserId = '.$id);
+		if(count($res)==0) return null;
+		return $res[0]['Content_type'];
+	}
+	
+	public function update($u)
+	{
+		$this->db->queryWithoutResult('UPDATE `user` SET `Password`="'.$u->password.'" WHERE UserId='.$u->id);
+	}
+	
 	private function mapUser($u){
 		return new User($u['UserId'], $u['Email'], $u['Password']);
 	}

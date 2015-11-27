@@ -59,7 +59,8 @@ CREATE TABLE IF NOT EXISTS `eventtype` (
 CREATE TABLE IF NOT EXISTS `user` (
   `UserId` int(11) NOT NULL,
   `Password` text NOT NULL,
-  `Email` text NOT NULL
+  `Email` text NOT NULL,
+  `Content_type` text
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
@@ -67,7 +68,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`UserId`, `Password`, `Email`) VALUES
-(1, 'Password', 'stas249501@gmail.com');
+(1, 'Password', 'stas249501@gmail.com'),
+(2, '123456', 'stas249501@mail.ru', ''),
+(3, 'admin666', 'admin', ''),
+(8, 'aaaaaa7890', 'tazik047', '');
 
 --
 -- Индексы сохранённых таблиц

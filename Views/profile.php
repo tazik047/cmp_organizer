@@ -12,7 +12,7 @@ $user = get_current_organizer_user();
             Фото
         </dt>
         <dd>
-            <img src="/Views/assets/img/ui-sam.jpg"/>
+            <img src="<?php print generateUrl('avatar'); ?>"/>
         </dd>
         <dt>
             Email

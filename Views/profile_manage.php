@@ -1,5 +1,28 @@
-<?php function RenderBody(){ ?>
-	<form enctype = "multipart/form-data" action="POST">
+<?php function RenderBody(){
+	if($_POST){
+		$repo = $GLOBALS['UserRepository'];
+		$u = get_current_organizer_user();
+		$errors = [];
+		if($u->password!=$_POST['old_password'])	{
+			$errors[] = "Вы указали неверный текущий пароль";
+		}		
+		if($_POST['new_password']!=$_POST['repeate_password'])	{
+			$errors[] = "Пароли не совпадают";
+		}
+		if(strlen($_POST['new_password']) < 6)	{
+			$errors[] = "Пароль должен быть больше 6 символов";
+		}
+		if(count($errors)==0){
+			upload_avatar($repo);
+			$repo->update(new User($u->id, '', $_POST['new_password']));
+			if(count($errors)==0){
+				header("Location: ". generateGlobalUrl('profile'));
+			}
+		}
+	}
+
+	?>
+	<form enctype = "multipart/form-data" method="POST">
 		<div class="form-horizontal">
 			<hr />
 			<?php if(isset($errors)): ?>
@@ -36,10 +59,10 @@
 			<div class="form-group">
 				<label id="avatar" class="control-label col-md-2">Аватар</label>
 				<div class="col-md-10">
-					<img width="150" src="/Views/assets/img/ui-sam.jpg" />
+					<img width="150" src="<?php print generateUrl('avatar'); ?>" />
 					<div>
 						Загрузить новое изображение:
-						<input type="file" name="File" class="form-control" accept="image/*" />
+						<input type="file" name="avatar" class="form-control" accept="image/*" />
 					</div>
 				</div>
 			</div>

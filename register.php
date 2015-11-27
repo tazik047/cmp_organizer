@@ -4,7 +4,7 @@
 	if($_POST){
 		$repo = $GLOBALS['UserRepository'];
 		$u = new User(0, $_POST['login'], $_POST['password']);
-		#errors = [];
+		$errors = [];
 		if(!preg_match("/^[a-zA-Z0-9]+$/",$_POST['login']))	{
 			$errors[] = "Логин может состоять только из букв английского алфавита и цифр";
 		}

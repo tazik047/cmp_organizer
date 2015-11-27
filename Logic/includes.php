@@ -13,6 +13,7 @@ function generateGlobalUrl($page)
 Include 'Model/User.php'; 
 
 Include 'Logic/authorize.php';
+Include 'Logic/AvatarService.php';
  
 Include 'Logic/DataBase/Database.php';
 Include 'Logic/DataBase/UserRepository.php';
