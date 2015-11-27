@@ -13,7 +13,7 @@ class EventTypeRepository
 
     public function __construct(){
         $this->db = new Database();
-		$userRepo = $GLOBALS['UserRepository'];
+		$this->userRepo = $GLOBALS['UserRepository'];
     }
 
     public function get()
@@ -37,7 +37,7 @@ class EventTypeRepository
     }
 	
 	public function insert($type){
-		$this->db->queryWithoutResult("INSERT INTO `eventtype`(`UserId`, `Name`, `Color`) VALUES ($type->user->Id, $type->name, $type->color)");
+		$this->db->queryWithoutResult("INSERT INTO `eventtype`(`UserId`, `Name`, `Color`) VALUES (\"".$type->user->id."\", \"$type->name\", \"$type->color\")");
 	}
 	
 	private function mapEventType($e){

@@ -6,7 +6,7 @@
  * Date: 26.11.2015
  * Time: 0:16
  */
-class User
+class EventType
 {
     public $id;
     public $user;
