@@ -6,7 +6,7 @@
  * Date: 25.11.2015
  * Time: 23:17
  */
-class EventTypeRepository
+class EventRepository
 {
     var $db;
 	var $userRepo;
@@ -18,12 +18,12 @@ class EventTypeRepository
 
     public function get()
     {
-        $res = $this->db->query("SELECT * FROM eventtype");
-		$eventtypes = [];
+        $res = $this->db->query("SELECT * FROM event");
+		$events = [];
 		foreach($res as $e){
-			$eventtypes[] = $this->mapEventType($e);
+			$events[] = $this->mapEvent($e);
 		}
-        return $eventtypes;
+        return $events;
     }
 
     public function getByUserId($id){
@@ -40,7 +40,7 @@ class EventTypeRepository
 		$this->db->queryWithoutResult("INSERT INTO `eventtype`(`UserId`, `Name`, `Color`) VALUES (\"".$type->user->id."\", \"$type->name\", \"$type->color\")");
 	}
 	
-	private function mapEventType($e){
-		return new EventType($e['EventTypeId'], $this->userRepo->getById($e['UserId']), $e['Name'], $e['Color']);
+	private function mapEvent($e){
+		return new Event($e['EventTypeId'], $this->userRepo->getById($e['UserId']), $e['Name'], $e['Color']);
 	}
 }

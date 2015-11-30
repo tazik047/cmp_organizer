@@ -10,7 +10,8 @@ function generateGlobalUrl($page)
 	return "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/".$page.".php";
 }
 
-Include 'Model/User.php'; 
+Include 'Model/User.php';
+Include 'Model/EventType.php';
 
 Include 'Logic/authorize.php';
 Include 'Logic/AvatarService.php';

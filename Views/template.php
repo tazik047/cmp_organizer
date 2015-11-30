@@ -254,7 +254,7 @@ Please, answer asap.
               <div class="row">
                   <div class="col-lg-9 main-chart">
 
-                  	<?php RenderBody(); ?>
+                  	<?php $scripts = RenderBody();  ?>
 
                   </div><!-- /col-lg-9 END SECTION MIDDLE -->
 
@@ -416,6 +416,7 @@ Please, answer asap.
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="/Views/assets/js/jquery.js"></script>
     <script src="/Views/assets/js/jquery-1.8.3.min.js"></script>
+    <script src="/Views/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
     <script src="/Views/assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="/Views/assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="/Views/assets/js/jquery.scrollTo.min.js"></script>
@@ -432,23 +433,10 @@ Please, answer asap.
     <!--script for this page-->
     <script src="/Views/assets/js/sparkline-chart.js"></script>
 	<script src="/Views/assets/js/zabuto_calendar.js"></script>
+  <?php  print $scripts; ?>
 
 	<script type="text/javascript">
     $(document).ready(function () {
-        var unique_id = $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: 'Welcome to Dashgum!',
-            // (string | mandatory) the text inside the notification
-            text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
-            // (string | optional) the image to display on the left
-            image: '/Views/assets/img/ui-sam.jpg',
-            // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
-            // (int | optional) the time you want it to be alive for before fading out
-            time: '',
-            // (string | optional) the class name you want to apply to that specific message
-            class_name: 'my-sticky-class'
-        });
 
 		$('.go-top').click(function () {
 			$.scrollTo(0, 1000);
