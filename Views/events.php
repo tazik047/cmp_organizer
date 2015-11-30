@@ -1,7 +1,12 @@
 <?php function RenderBody(){
-	$scripts = '<script src="/Views/assets/js/fullcalendar/fullcalendar.min.js"></script>   	<script src="/Views/assets/js/calendar-conf-events.js"></script>';
+	$scripts = '<script src="/Views/assets/js/fullcalendar/moment.min.js"></script>'.
+		'<script src="/Views/assets/js/fullcalendar/fullcalendar.min.js"></script>'.
+		'<script src="/Views/assets/js/fullcalendar/lang/ru.js"></script>'.
+		'<script src="/Views/assets/js/calendar-conf-events.js"></script>';
 	?>
-	<link href="/Views/assets/js/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+	<link rel='stylesheet' href='/Views/assets/js/fullcalendar/jquery-ui.min.css' />
+	<link href="/Views/assets/js/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
+	<link href="/Views/assets/js/fullcalendar/fullcalendar.print.css" rel="stylesheet" media='print'/>
 	<aside class="col-lg-3 mt">
 		<h4><i class="fa fa-angle-right"></i> Draggable Events</h4>
 		<div id="external-events">

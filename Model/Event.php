@@ -12,7 +12,7 @@ class EventType
     public $user;
     public $event_type;
     public $time;
-    
+
 	public $color;
 
     public function __construct($id, $user, $name, $color){

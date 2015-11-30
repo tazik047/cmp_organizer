@@ -1410,7 +1410,7 @@ PANELS CONFIGURATIONS
 
 /* Calendar Configuration */
 #calendar {
-	color: white;
+	color: black;
 	padding: 0px !important;
 }
 .calendar-month-header {
