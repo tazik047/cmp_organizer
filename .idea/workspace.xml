@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="223b30d8-f15a-4970-ae78-06be7823d88b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Logic/AvatarService.php" afterPath="$PROJECT_DIR$/Logic/AvatarService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/User.php" afterPath="$PROJECT_DIR$/Model/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Logic/DataBase/UserRepository.php" afterPath="$PROJECT_DIR$/Logic/DataBase/UserRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/assets/js/calendar-conf-events.js" afterPath="$PROJECT_DIR$/Views/assets/js/calendar-conf-events.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/home.php" afterPath="$PROJECT_DIR$/Views/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_sql/organizer.sql" afterPath="$PROJECT_DIR$/_sql/organizer.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/profile.php" afterPath="$PROJECT_DIR$/Views/profile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/profile_manage.php" afterPath="$PROJECT_DIR$/Views/profile_manage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/register.php" afterPath="$PROJECT_DIR$/register.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/template.php" afterPath="$PROJECT_DIR$/Views/template.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/types.php" afterPath="$PROJECT_DIR$/Views/types.php" />
-    </list>
+    <list default="true" id="223b30d8-f15a-4970-ae78-06be7823d88b" name="Default" comment="" />
     <ignored path="Organizer.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -393,6 +379,7 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -444,7 +431,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1921875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />

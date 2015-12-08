@@ -8,23 +8,22 @@ $(document).ready(function(){
         },
         eventClick: function(calEvent, jsEvent, view) {
 
-            $(this).avgrund({
-                holderClass: 'custom',
-                showClose: true,
-                showCloseText: 'закрыть',
-                onBlurContainer: '.container',
-                onLoad: function(elem){
-                    $.ajax({
-                        url:"/event_detail.php",
-                        data:{id:calEvent.id},
-                        success:function(data){
-                            $('.avgrund-popin').append(data);
-                        }
-                    });
-                },
-                template: ''
-            });
-            $(this).click();
+						$.ajax({
+					url:"/event_detail.php",
+					data:{id:calEvent.id},
+					success:function(data){
+						swal({   
+							title: calEvent.title + "!",   
+							showCancelButton: false,
+							showConfirmButton: false,
+							confirmButtonText: "Редактировать",
+							cancelButtonText: "Закрыть",
+							text: "<div>"+data+"</div>",   
+							html: true
+						});
+					}
+				});
+			
         },
         loading:function(isLoading){
             if(isLoading){

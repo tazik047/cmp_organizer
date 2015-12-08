@@ -11,8 +11,6 @@ Include 'Logic/includes.php';
 $event_repo = $GLOBALS['EventRepository'];
 $event = $event_repo->getById($_GET['id']);
 ?>
-<div>
- <h2><?php print $event->name; ?></h2>
  <hr />
  <dl class="dl-horizontal">
   <dt>
@@ -57,4 +55,3 @@ $event = $event_repo->getById($_GET['id']);
  <a class="btn btn-block btn-default btn-success" href="<?php print generateUrl('events','method=update&id='.$event->id); ?>">
   Изменить событие
  </a>
-</div>
