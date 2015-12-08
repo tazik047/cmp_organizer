@@ -38,14 +38,14 @@
 			<div class="form-group">
 				<label class = "control-label col-md-2" for="firstName">Имя: </label>
 				<div class="col-md-10">
-					<input type="text" name="firstName" class = "form-control" id="firstName" value="<?php print $u->firstName; ?>">
+					<input type="text" name="firstName" class = "form-control" id="firstName" value="<?php print $u->firstName; ?>" required>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class = "control-label col-md-2" for="surname">Фамилия: </label>
 				<div class="col-md-10">
-					<input type="text" name="surname" class = "form-control" id="surname" value="<?php print $u->surname; ?>">
+					<input type="text" name="surname" class = "form-control" id="surname" value="<?php print $u->surname; ?>" required>
 				</div>
 			</div>
 			

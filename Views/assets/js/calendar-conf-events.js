@@ -32,7 +32,6 @@ $(document).ready(function(){
             else{
                 $('#loading').hide();
             }
-            console.log(isLoading);
         },
         events: "/events.php",
         allDaySlot: false

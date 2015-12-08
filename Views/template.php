@@ -19,15 +19,12 @@
     <link href="/Views/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="/Views/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/Views/assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="/Views/assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="/Views/assets/lineicons/style.css">
 
     <!-- Custom styles for this template -->
     <link href="/Views/assets/css/style.css" rel="stylesheet">
     <link href="/Views/assets/css/style-responsive.css" rel="stylesheet">
-
-    <script src="/Views/assets/js/chart-master/Chart.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -155,9 +152,6 @@
     <script type="text/javascript" src="/Views/assets/js/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="/Views/assets/js/gritter-conf.js"></script>
 
-    <!--script for this page-->
-    <script src="/Views/assets/js/sparkline-chart.js"></script>
-	<script src="/Views/assets/js/zabuto_calendar.js"></script>
   <?php  print $scripts; ?>
 
 	<script type="text/javascript">
