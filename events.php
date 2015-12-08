@@ -8,55 +8,10 @@
  $AllowAnonymous = false;
  
 Include 'Logic/includes.php';
-
-if(!isset($_GET['action'])){
-	$_GET['action'] = 'home';
+$repo = $GLOBALS['EventRepository'];
+$events = $repo->getByUserId(get_current_organizer_user()->id);
+$eventsRes = [];
+foreach($events as $e){
+ $eventsRes[] = new EventViewModel($e->id,$e->name,$e->event_type->color,$e->startDate,$e->endDate);
 }
-
-$view_name = '';
-
-switch($_GET['action']){
-	case 'avatar':
-		get_avatar();
-		return;
-	case 'logout':
-		logout();
-		return;
-	case 'events':
-		if(!isset($_GET['method'])){
-			$view_name = 'events';
-		}
-		else{
-			if($_GET['method']=='add'){
-				$view_name = 'events_add';
-			}
-		}
-		break;
-	case 'profile':
-		if(!isset($_GET['method'])){
-			$view_name = 'profile';
-		}
-		else{
-			if($_GET['method']=='manage'){
-				$view_name = 'profile_manage';
-			}
-		}
-		break;
-	case 'eventtypes':
-		if(!isset($_GET['method'])){
-			$view_name = 'types';
-		}
-		else{
-			if($_GET['method']=='create'){
-				$view_name = 'types_create';
-			}
-		}
-		break;
-}
-if($view_name==''){
-	$view_name = 'home';
-}
-
-Include 'Views/'.$view_name.'.php';
-
-Include 'Views/template.php';
+print json_encode($eventsRes, JSON_UNESCAPED_UNICODE);

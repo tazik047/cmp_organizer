@@ -23,21 +23,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `event`
+-- Структура таблицы `user`
 --
 
-CREATE TABLE IF NOT EXISTS `event` (
-  `EventId` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
   `UserId` int(11) NOT NULL,
-  `EventTypeId` int(11) NOT NULL,
-  `Name` text NOT NULL,
-  `Description` text NOT NULL,
-  `Date` date NOT NULL,
-  `Duration` bigint(20) NOT NULL,
-  `Notification` text NOT NULL
+  `Password` text NOT NULL,
+  `Email` text NOT NULL,
+  `Content_Type` text,
+  PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
 
 --
 -- Структура таблицы `eventtype`
@@ -47,53 +42,53 @@ CREATE TABLE IF NOT EXISTS `eventtype` (
   `EventTypeId` int(11) NOT NULL,
   `UserId` int(11) DEFAULT NULL,
   `Name` text NOT NULL,
-  `Color` text NOT NULL
+  `Color` text NOT NULL,
+  PRIMARY KEY (EventTypeId),
+  FOREIGN KEY (UserId) REFERENCES user(UserId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user`
+-- Структура таблицы `event`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `event` (
+  `EventId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
-  `Password` text NOT NULL,
-  `Email` text NOT NULL
-  `Content_Type` text
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `EventTypeId` int(11) NOT NULL,
+  `Name` text NOT NULL,
+  `Description` text NOT NULL,
+  `Notification` text NOT NULL,
+  `StartDate` datetime NOT NULL,
+  `EndDate` datetime NOT NULL,
+  PRIMARY KEY (EventId),
+  FOREIGN KEY (EventTypeId) REFERENCES eventtype(EventTypeId),
+  FOREIGN KEY (UserId) REFERENCES user(UserId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `profile`
+--
+
+CREATE TABLE IF NOT EXISTS `profile` (
+  `ProfileId` int(11) NOT NULL,
+  `FirstName` text NOT NULL,
+  `Surname` text NOT NULL,
+  PRIMARY KEY (ProfileId),
+  FOREIGN KEY (ProfileId) REFERENCES user(UserId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Дамп данных таблицы `user`
 --
 
 INSERT INTO `user` (`UserId`, `Password`, `Email`) VALUES
-(1, 'Password', 'stas249501@gmail.com'),
-(2, '123456', 'stas249501@mail.ru', ''),
-(3, 'admin666', 'admin', ''),
-(4, 'aaaaaa7890', 'tazik047', '');
-
---
--- Индексы сохранённых таблиц
---
-
---
--- Индексы таблицы `event`
---
-ALTER TABLE `event`
-  ADD PRIMARY KEY (`EventId`);
-
---
--- Индексы таблицы `eventtype`
---
-ALTER TABLE `eventtype`
-  ADD PRIMARY KEY (`EventTypeId`);
-
---
--- Индексы таблицы `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`UserId`);
+(1, 'admin666', 'admin');
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -113,7 +108,7 @@ ALTER TABLE `eventtype`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

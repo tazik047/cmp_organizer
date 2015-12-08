@@ -21,11 +21,30 @@ $user = get_current_organizer_user();
         <dd>
             <?php print $user->email; ?>
         </dd>
+        <?php if($user->firstName!=null):?>
+            <dt>
+                Имя
+            </dt>
+
+            <dd>
+                <?php print $user->firstName; ?>
+            </dd>
+            <dt>
+                Фамилия
+            </dt>
+
+            <dd>
+                <?php print $user->surname; ?>
+            </dd>
+        <?php endif; ?>
     </dl>
 </div>
 <p>
 	<a href="<?php print generateUrl('profile','method=manage'); ?>">
 		Редактировать данный
-	</a>
+	</a> |
+    <a href="<?php print generateUrl('profile','method=password'); ?>">
+        Изменить пароль
+    </a>
 </p>
 <?php } ?>

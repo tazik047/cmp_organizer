@@ -5,12 +5,9 @@
 		$repo = $GLOBALS['UserRepository'];
 		$u = new User(0, $_POST['login'], $_POST['password']);
 		$errors = [];
-		if(!preg_match("/^[a-zA-Z0-9]+$/",$_POST['login']))	{
-			$errors[] = "Логин может состоять только из букв английского алфавита и цифр";
+		if(!preg_match("/^.+@.+\..+$/", $_POST['login']))	{
+			$errors[] = "Неверный email";
 		}
-		if(strlen($_POST['login']) < 3 or strlen($_POST['login']) > 30)	{
-			$errors[] = "Логин должен быть не меньше 3-х символов и не больше 30";
-		}		
 		if(strlen($_POST['password']) < 6)	{
 			$errors[] = "Пароль должен быть больше 6 символов";
 		}
@@ -73,9 +70,9 @@
 							?>
 						</p>
 					<?php endif; ?>
-		            <input type="text" class="form-control" placeholder="Email" autofocus name="login">
+		            <input type="text" class="form-control" placeholder="Email" autofocus name="login" required>
 		            <br>
-		            <input type="password" class="form-control" placeholder="Password" name="password">
+		            <input type="password" class="form-control" placeholder="Password" name="password" required>
 		            <br>
 					<button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> СОЗДАТЬ</button>
 		            <hr>

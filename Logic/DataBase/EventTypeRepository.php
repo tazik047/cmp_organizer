@@ -26,6 +26,14 @@ class EventTypeRepository
         return $eventtypes;
     }
 
+	public function getById($id)
+	{
+		$res = $this->db->query("SELECT * FROM eventtype WHERE EventTypeId = $id");
+		if(count($res)==0) return null;
+		$event_type = $this->mapEventType($res[0]);
+		return $event_type;
+	}
+
     public function getByUserId($id){
 		$res = $this->db->query("SELECT * FROM eventtype where UserId = ".$id);
 		if(count($res)==0) return null;

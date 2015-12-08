@@ -30,6 +30,9 @@ switch($_GET['action']){
 			if($_GET['method']=='add'){
 				$view_name = 'events_add';
 			}
+			elseif($_GET['method']=='update'){
+				$view_name='events_update';
+			}
 		}
 		break;
 	case 'profile':
@@ -39,6 +42,9 @@ switch($_GET['action']){
 		else{
 			if($_GET['method']=='manage'){
 				$view_name = 'profile_manage';
+			}
+			elseif($_GET['method']=='password'){
+				$view_name = 'profile_changepass';
 			}
 		}
 		break;

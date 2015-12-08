@@ -18,6 +18,9 @@ function get_avatar(){
 	$user = get_current_organizer_user();
 	$repo = $GLOBALS['UserRepository'];
 	$type = $repo->getAvatarType($user->id);
+	if($type==null){
+		$type ="image/jpeg";
+	}
 	header("Content-type: $type");
 	$path = get_file_name_for_avatar($user->email);
 	if(!file_exists($path)){

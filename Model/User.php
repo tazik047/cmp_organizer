@@ -11,6 +11,8 @@ class User
     public $id;
     public $password;
     public $email;
+    public $firstName;
+    public $surname;
 
     public function __construct($id, $email, $password){
         $this->email=$email;

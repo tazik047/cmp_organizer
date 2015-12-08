@@ -16,7 +16,7 @@ class UserRepository
 
     public function get()
     {
-        $res = $this->db->query("SELECT * FROM user");
+        $res = $this->db->query("SELECT * FROM user left join profile on UserId = ProfileId");
 		$users = [];
 		foreach($res as $u){
 			$users[] = $this->mapUser($u);
@@ -25,14 +25,14 @@ class UserRepository
     }
 
     public function getById($id){
-		$res = $this->db->query("SELECT * FROM user where UserId = ".$id);
+		$res = $this->db->query("SELECT * FROM user left join profile on UserId = ProfileId where UserId = ".$id);
 		if(count($res)==0) return null;
 		$user = $this->mapUser($res[0]);
         return $user;
     }
 	
 	public function getByEmail($email){
-		$res = $this->db->query("SELECT * FROM user where Email = '$email'");
+		$res = $this->db->query("SELECT * FROM user left join profile on UserId = ProfileId where Email = '$email'");
 		if(count($res)==0) return null;
 		$user = $this->mapUser($res[0]);
         return $user;
@@ -56,8 +56,21 @@ class UserRepository
 	{
 		$this->db->queryWithoutResult('UPDATE `user` SET `Password`="'.$u->password.'" WHERE UserId='.$u->id);
 	}
+
+	public function updateProfile($u){
+		$res = $this->db->query("SELECT * FROM profile where ProfileId = $u->id");
+		if(count($res)==0){
+			$this->db->queryWithoutResult('insert into profile(`ProfileId`, `FirstName`, `Surname`) values("'.$u->id.'", "'.$u->firstName.'", "'.$u->surname.'")');
+		}
+		else{
+			$this->db->queryWithoutResult('UPDATE `profile` SET `Password`="'.$u->firstName.'", `Surname`="'.$u->surname.'" WHERE ProfileId='.$u->id);
+		}
+	}
 	
 	private function mapUser($u){
-		return new User($u['UserId'], $u['Email'], $u['Password']);
+		$user =  new User($u['UserId'], $u['Email'], $u['Password']);
+		$user->firstName = $u['FirstName'];
+		$user->surname = $u['Surname'];
+		return $user;
 	}
 }

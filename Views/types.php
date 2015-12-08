@@ -1,6 +1,12 @@
-<?php function RenderBody(){
+<?php function RenderBody(){?>
+	<h2>Мои типы событий</h2>
+	<?php
 	$repo = $GLOBALS['EventTypeRepository'];
 	$types = $repo->getByUserId(get_current_organizer_user()->id);
+	if(count($types)==0){
+		print 'Вы еще не создали ни одного типа события';
+	}
+	else{
 	?>
 	<style>
 		.color-block{
@@ -10,7 +16,6 @@
 			text-align: center;
 		}
 	</style>
-	<h2>Мои типы событий</h2>
 	<table class="table table-bordered table-striped table-responsive">
 		<thead>
 			<tr>
@@ -31,4 +36,4 @@
 		</tbody>
 	</table>
 
-<?php } ?>
+<?php }} ?>

@@ -16,14 +16,14 @@
 			<div class="form-group">
 				<label for="name" class = "control-label col-md-offset-2 col-md-2">Название</label>
 				<div class="col-md-6">
-					<input type="text" id="name" name="name" class = "form-control" required>
+					<input type="text" id="name" name="name" class = "form-control" value="<?php print get_value_for_form('name');?>" required>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="color" class = "control-label col-md-offset-2 col-md-2">Цвет</label>
 				<div class="col-md-6">
-					<input type="color" id="color" name="color" class = "form-control" required>
+					<input type="color" id="color" name="color" class = "form-control" value="<?php print get_value_for_form('color');?>" required>
 				</div>
 			</div>
 
@@ -34,4 +34,10 @@
 			</div>
 		</div>
 	</form>
-<?php } ?>
+<?php }
+function get_value_for_form($name)
+{
+	return isset($_POST[$name]) ? $_POST[$name] : "";
+}
+
+?>

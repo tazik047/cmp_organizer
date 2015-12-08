@@ -2240,4 +2240,16 @@ label {
     min-height: 900px;
 }
 
+#loading{
+    text-align: center;
+    display: none;
+    position: absolute;
+    z-index: 2;
+    left: 40%;
+    top: 40%;
+}
+
+.fc-event-container{
+    cursor: pointer;
+}
 

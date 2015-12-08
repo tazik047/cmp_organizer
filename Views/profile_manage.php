@@ -1,22 +1,22 @@
 <?php function RenderBody(){
+	$u = get_current_organizer_user();
 	if($_POST){
 		$repo = $GLOBALS['UserRepository'];
-		$u = get_current_organizer_user();
 		$errors = [];
-		if($u->password!=$_POST['old_password'])	{
-			$errors[] = "Вы указали неверный текущий пароль";
-		}		
-		if($_POST['new_password']!=$_POST['repeate_password'])	{
-			$errors[] = "Пароли не совпадают";
+		if(!isset($_POST['firstName']))	{
+			$errors[] = "Вы не указали свое имя";
 		}
-		if(strlen($_POST['new_password']) < 6)	{
-			$errors[] = "Пароль должен быть больше 6 символов";
+		if(!isset($_POST['surname']))	{
+			$errors[] = "Вы не указали свою фамилию";
 		}
 		if(count($errors)==0){
 			upload_avatar($repo);
-			$repo->update(new User($u->id, '', $_POST['new_password']));
+			$user = new User($u->id, '', '');
+			$user->firstName = $_POST['firstName'];
+			$user->surname = $_POST['surname'];
+			$repo->updateProfile($user);
 			if(count($errors)==0){
-				header("Location: ". generateGlobalUrl('profile'));
+				echo("<script>location.href = '".generateUrl('profile')."';</script>");
 			}
 		}
 	}
@@ -36,23 +36,16 @@
 			<?php endif; ?>
 			
 			<div class="form-group">
-				<label class = "control-label col-md-2" for="old">Старый пароль: </label>
+				<label class = "control-label col-md-2" for="firstName">Имя: </label>
 				<div class="col-md-10">
-					<input type="password" name="old_password" class = "form-control" id="old">
+					<input type="text" name="firstName" class = "form-control" id="firstName" value="<?php print $u->firstName; ?>">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class = "control-label col-md-2" for="new">Новый пароль: </label>
+				<label class = "control-label col-md-2" for="surname">Фамилия: </label>
 				<div class="col-md-10">
-					<input type="password" name="new_password" class = "form-control" id="new">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class = "control-label col-md-2" for="repeate"> Повторите пароль: </label>
-				<div class="col-md-10">
-					<input type="password" name="repeate_password" class = "form-control" id="repeate">
+					<input type="text" name="surname" class = "form-control" id="surname" value="<?php print $u->surname; ?>">
 				</div>
 			</div>
 			
