@@ -6,7 +6,9 @@
  * Date: 26.11.2015
  * Time: 0:16
  */
-class EventType
+namespace Model
+
+class EventType extends BaseEntity
 {
     public $id;
     public $user;

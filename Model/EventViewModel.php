@@ -6,7 +6,9 @@
  * Date: 03.12.2015
  * Time: 21:17
  */
-class EventViewModel
+namespace Model;
+
+class EventViewModel extends BaseEntity
 {
     public $id;
     public $title;

@@ -6,11 +6,15 @@
  * Date: 25.11.2015
  * Time: 23:23
  */
+namespace DataBase;
+
 class Database
 {
     var $connection;
 
-    public function __construct(){
+    private static $instance;
+
+    private function __construct(){
         $this->connection = mysqli_connect('localhost','root','cnfybckfd') or die("Ошибка соединения с сервером");
         mysqli_select_db($this->connection, "organizer") or die("База данных не выбрана");
     }
@@ -30,5 +34,13 @@ class Database
             $rows[] = $r;
         }
         return $rows;
+    }
+
+    public static function get_instance()
+    {
+        if(self::$instance == null){
+            self::$instance = new Database();
+        }
+        return self::$instance;
     }
 }

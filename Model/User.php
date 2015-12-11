@@ -1,4 +1,5 @@
 <?php
+namespace Model;
 
 /**
  * Created by PhpStorm.
@@ -6,7 +7,7 @@
  * Date: 26.11.2015
  * Time: 0:16
  */
-class User
+class User extends BaseEntity
 {
     public $id;
     public $password;
