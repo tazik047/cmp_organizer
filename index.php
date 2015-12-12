@@ -5,9 +5,10 @@
  * Date: 25.11.2015
  * Time: 23:02
  */
- $AllowAnonymous = false;
  
 Include 'Logic/includes.php';
+
+isAuthorized();
 
 if(!isset($_GET['action'])){
 	$_GET['action'] = 'home';

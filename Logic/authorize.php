@@ -1,43 +1,40 @@
 <?php
+use Model\User;
 
 session_start();
 
-if(!$AllowAnonymous){
+function isAuthorized(){
 	if(!isset($_SESSION['userId'])){
 		header("Location: ".generateGlobalUrl('login'));
 	}
 }
 
 function get_current_organizer_user(){
-	$repo = $GLOBALS['UserRepository'];
-	return $repo->getById($_SESSION['userId']);
+	$user = new User();
+	$user->getById($_SESSION['userId']);
+	return $user;
 }
 
-function login(){
+function login($login, $password){
 	$error = array();
-	if ($_POST['login'] != "" && $_POST['password'] != "") { 		
-		$login = $_POST['login']; 
-		$password = $_POST['password'];
-		$repo = $GLOBALS['UserRepository'];
-		$user = $repo->getByEmail($login);
-		if ($user!=null) {			
-			if ($user->password==$password)	{ 			
-				$_SESSION['userId'] = $user->id;
-				return $error; 			
-			} 			
-			else { 				
-				$error[] = "Неверный пароль"; 										
-				return $error; 			
-			} 
-		}			
-		else { 			
-			$error[] = "Неверный логин и пароль"; 			
-			return $error; 		
-		} 
-	}		
-	else { 		
-		$error[] = "Поля не должны быть пустыми!"; 				
-		return $error; 	
+	$user = new User();
+	$user->getByEmail($login);
+	print '<pre>';
+	print_r($user);
+	die();
+	if (!$user->isEmpty()) {
+		if ($user->getPassword()==$password)	{
+			$_SESSION['userId'] = $user->id;
+			return $error;
+		}
+		else {
+			$error[] = "Неверный или пароль";
+			return $error;
+		}
+	}
+	else {
+		$error[] = "Неверный логин или пароль";
+		return $error;
 	}
 }
 

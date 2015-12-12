@@ -6,7 +6,7 @@
  * Date: 26.11.2015
  * Time: 0:16
  */
-namespace Model
+namespace Model;
 
 class EventType extends BaseEntity
 {

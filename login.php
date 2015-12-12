@@ -1,10 +1,15 @@
  <?php
-	$AllowAnonymous = true;
 	Include 'Logic/includes.php';
 	if($_POST){
-		$errors = login();
+		$errors = array();
+		if (!isset($_POST['login']) || $_POST['login']=="" || !isset($_POST['password']) || $_POST['password']=="") {
+			$errors[] = "Поля не должны быть пустыми!";
+		}
 		if(count($errors)==0){
-			header("Location: ". generateGlobalUrl('index'));
+			$errors = login($_POST['login'],$_POST['password']);
+			if(count($errors==0)) {
+				header("Location: " . generateGlobalUrl('index'));
+			}
 		}
 	}
 	?>
@@ -54,9 +59,9 @@
 							?>
 						</p>
 					<?php endif; ?>
-		            <input type="text" class="form-control" placeholder="Email" autofocus name="login">
+		            <input type="text" class="form-control" placeholder="Email" autofocus name="login" required>
 		            <br>
-		            <input type="password" class="form-control" placeholder="Password" name="password">
+		            <input type="password" class="form-control" placeholder="Password" name="password" required>
 		            <br>
 					<button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> ВОЙТИ</button>
 		            <hr>

@@ -6,7 +6,7 @@
  * Date: 25.11.2015
  * Time: 23:23
  */
-namespace DataBase;
+namespace Logic\DataBase;
 
 class Database
 {
@@ -17,10 +17,6 @@ class Database
     private function __construct(){
         $this->connection = mysqli_connect('localhost','root','cnfybckfd') or die("Ошибка соединения с сервером");
         mysqli_select_db($this->connection, "organizer") or die("База данных не выбрана");
-    }
-
-    public function __destruct(){
-        mysqli_close($this->connection);
     }
 
     public function queryWithoutResult($q){
@@ -36,7 +32,7 @@ class Database
         return $rows;
     }
 
-    public static function get_instance()
+    public static function getInstance()
     {
         if(self::$instance == null){
             self::$instance = new Database();
