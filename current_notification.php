@@ -7,9 +7,9 @@
  */
 Include 'Logic/includes.php';
 isAuthorized();
-
-$event_repo = $GLOBALS['EventRepository'];
-$notifications = $event_repo->getCurrentNotification(get_current_organizer_user()->getId(), (new DateTime())->format('Y-m-d H:i:s'));
+$user = get_current_organizer_user();
+$event = new Event();
+$notifications = $event_repo->getCurrentNotification(get_current_organizer_user()->id, (new DateTime())->format('Y-m-d H:i:s'));
 if(count($notifications)!=0):?>
  <a href="<?= generateUrl('events')?>">
   <ul class="list-group">
