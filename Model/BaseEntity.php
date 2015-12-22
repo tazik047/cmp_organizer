@@ -9,7 +9,7 @@
 namespace Model;
 use Logic\DataBase\Database;
 
-class BaseEntity
+abstract class BaseEntity
 {
     protected $fields;
     protected $tableName;
@@ -24,13 +24,11 @@ class BaseEntity
     }
 
     public function isEmpty(){
-        /*print count($this->fields);
-        die();*/
         return count($this->fields)==0;
     }
 
     public function get(){
-        $this->fields = $this->db->query("Select * from `$this->tableName`");
+        return $this->db->query("Select * from `$this->tableName`");
     }
 
     public function getById($id){
@@ -48,22 +46,22 @@ class BaseEntity
             if($k==$this->idColumnName || $v==null){
                 continue;
             }
-            $names .= "`$k`";
-            $values .= "\"$v\"";
+            $names .= "`$k`,";
+            $values .= "\"$v\",";
         }
-        print "INSERT INTO `$this->tableName`($names) VALUES ($values)";
-        $this->db->queryWithoutResult("INSERT INTO `$this->tableName`($names) VALUES ($values)");
+        $q = "INSERT INTO `$this->tableName`(".substr($names,0,-1).") VALUES (".substr($values,0,-1).")";
+        $this->db->queryWithoutResult($q);
     }
 
-    public function update($event){
-        $q = 'UPDATE `event` SET ';
+    public function update(){
+        $q = 'UPDATE `'.$this->tableName.'` SET ';
         foreach($this->fields as $k=>$v){
             if($k==$this->idColumnName || $v==null){
                 continue;
             }
             $q .= "`$k` = \"$v\", ";
         }
-        $q = substr($q, 0, -1)." where $this->idColumnName = $this->fields[$this->idColumnName]";
+        $q = substr($q, 0, -2)." where $this->idColumnName = ".$this->fields[$this->idColumnName];
         $this->db->queryWithoutResult($q);
     }
 }

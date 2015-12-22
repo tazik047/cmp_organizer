@@ -1,8 +1,10 @@
 ﻿<?php function RenderBody(){
 	if($_POST && isset($_POST['name']) && isset($_POST['color'])){
-		$repo = $GLOBALS['EventTypeRepository'];
-		$type = new EventType(0, get_current_organizer_user(), $_POST['name'], $_POST['color']);
-		$repo->insert($type);
+		$type = new \Model\EventType();
+		$type->setName($_POST['name']);
+		$type->setColor($_POST['color']);
+		$type->setUserId(get_current_organizer_user()->getId());
+		$type->insert();
 		echo("<script>location.href = '".generateUrl('eventtypes')."';</script>");
 	}
 
@@ -16,14 +18,14 @@
 			<div class="form-group">
 				<label for="name" class = "control-label col-md-offset-2 col-md-2">Название</label>
 				<div class="col-md-6">
-					<input type="text" id="name" name="name" class = "form-control" value="<?php print get_value_for_form('name');?>" required>
+					<input type="text" id="name" name="name" class = "form-control" value="<?= get_value_for_form('name');?>" required>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="color" class = "control-label col-md-offset-2 col-md-2">Цвет</label>
 				<div class="col-md-6">
-					<input type="color" id="color" name="color" class = "form-control" value="<?php print get_value_for_form('color');?>" required>
+					<input type="color" id="color" name="color" class = "form-control" value="<?= get_value_for_form('color');?>" required>
 				</div>
 			</div>
 
@@ -37,7 +39,7 @@
 <?php }
 function get_value_for_form($name)
 {
-	return isset($_POST[$name]) ? $_POST[$name] : "";
+	return isset($_POST[$name]) ? $_POST[$name] : "#000000";
 }
 
 ?>

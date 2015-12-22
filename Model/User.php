@@ -55,6 +55,24 @@ class User extends BaseEntity
         $this->tableName = "user";
     }
 
+    public function get()
+    {
+        $res = $this->db->query("SELECT * FROM user left join profile on UserId = ProfileId");
+        $users = [];
+        foreach($res as $u){
+            $i = new User();
+            $i->fields = $u;
+            $users[] = $i;
+        }
+        return $users;
+    }
+
+    public function getById($id){
+        $res = $this->db->query("SELECT * FROM user left join profile on UserId = ProfileId where UserId = ".$id);
+        if(count($res)==0) return null;
+        $this->fields = $res[0];
+    }
+
     public function getByEmail($email){
         $res = $this->db->query("SELECT * FROM user left join profile on UserId = ProfileId where Email = '$email'");
         if(count($res)!=0){
@@ -66,13 +84,27 @@ class User extends BaseEntity
         return isset($this->fields['Content_type'])?$this->fields['Content_type']:"";
     }
 
-    public function updateProfile($user){
-        $res = $this->db->query("SELECT * FROM profile where ProfileId = $user->id");
+    public function updateProfile(){
+        $res = $this->db->query("SELECT * FROM profile where ProfileId = ".$this->getId());
         if(count($res)==0){
-            $this->db->queryWithoutResult('insert into profile(`ProfileId`, `FirstName`, `Surname`) values("'.$user->id.'", "'.$user->firstName.'", "'.$user->surname.'")');
+            $this->db->queryWithoutResult('insert into profile(`ProfileId`, `FirstName`, `Surname`) values("'.$this->getId().'", "'.$this->getFirstName().'", "'.$this->getSurname().'")');
         }
         else{
-            $this->db->queryWithoutResult('UPDATE `profile` SET `Password`="'.$user->firstName.'", `Surname`="'.$user->surname.'" WHERE ProfileId='.$user->id);
+            $this->db->queryWithoutResult('UPDATE `profile` SET `FirstName`="'.$this->getFirstName().'", `Surname`="'.$this->getSurname().'" WHERE ProfileId='.$this->getId());
         }
+    }
+
+    public function insert(){
+        $this->db->queryWithoutResult('insert into user(`Password`, `Email`) values("'.$this->getPassword().'", "'.$this->getEmail().'")');
+    }
+
+    public function setAvatarType($type){
+        $this->fields['Content_type'] = $type;
+        $this->db->queryWithoutResult('UPDATE `user` SET `Content_type`="'.$type.'" WHERE UserId='.$this->getId());
+    }
+
+    public function update()
+    {
+        $this->db->queryWithoutResult('UPDATE `user` SET `Password`="'.$this->getPassword().'" WHERE UserId='.$this->getId());
     }
 }

@@ -1,16 +1,16 @@
 <?php
 
 function get_file_name_for_avatar($email){
-	$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/avatars/';
-	return $uploaddir . $email;
+	$uploadDir = $_SERVER['DOCUMENT_ROOT'].'/avatars/';
+	return $uploadDir . $email;
 }
 
-function upload_avatar($repo){
+function upload_avatar(){
 	if($_FILES['avatar']['size']!=0){
 		$user = get_current_organizer_user();
-		$uploadfile = get_file_name_for_avatar($user->email);
-		move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadfile);
-		$repo->setAvatarType($user->id, $_FILES['avatar']['type']);
+		$uploadFile = get_file_name_for_avatar($user->getEmail());
+		move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadFile);
+		$user->setAvatarType($_FILES['avatar']['type']);
 	}
 }
 

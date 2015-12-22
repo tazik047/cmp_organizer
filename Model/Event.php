@@ -6,6 +6,8 @@
  * Date: 26.11.2015
  * Time: 0:16
  */
+namespace Model;
+
 class Event extends BaseEntity
 {
     //public $id;
@@ -40,13 +42,25 @@ class Event extends BaseEntity
     public function setUserId($id){
         $this->fields['UserId'] = $id;
     }
-	
+
+    public function getUser(){
+        $user = new User();
+        $user->getById($this->getUserId());
+        return $user;
+    }
+
 	public function getEventTypeId(){
         return isset($this->fields['EventTypeId'])?$this->fields['EventTypeId']:"";
     }
 
     public function setEventTypeId($id){
         $this->fields['EventTypeId'] = $id;
+    }
+
+    public function getEventType(){
+        $type = new EventType();
+        $type->getById($this->getEventTypeId());
+        return $type;
     }
 	
 	public function getStartDate(){
@@ -85,6 +99,38 @@ class Event extends BaseEntity
         parent::__construct();
         $this->idColumnName = "EventId";
         $this->tableName = "event";
+    }
+
+    public function get(){
+        $res = parent::get();
+        $events = [];
+        foreach($res as $e){
+            $i = new Event();
+            $i->fields = $e;
+            $events[] = $i;
+        }
+        return $events;
+    }
+
+    public function getByUserId($id){
+        $res = $this->db->query("SELECT * FROM event where UserId = ".$id);
+        if(count($res)==0) return [];
+        $events = [];
+        foreach($res as $e){
+            $i = new Event();
+            $i->fields = $e;
+            $events[] = $i;
+        }
+        return $events;
+    }
+
+    public function getCurrentNotification($id, $now){
+        $res = $this->db->query("SELECT Notification FROM event where UserId = ".$id.' and StartDate<="'.$now.'" and "'.$now.'"<=EndDate');
+        $notifications = [];
+        foreach($res as $i){
+            $notifications[] = $i['Notification'];
+        }
+        return $notifications;
     }
 
     /*public function __construct($id, $user, $description, $notification, $event_type, $startDate, $endDate, $name){

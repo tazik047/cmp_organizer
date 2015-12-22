@@ -1,20 +1,21 @@
 <?php function RenderBody(){
 	if($_POST){
-		$event = new Event(0,
-			get_current_organizer_user(),
-			$_POST['description'],
-			$_POST['notification'],
-			new EventType($_POST['event_type'],'','',''),
-			$_POST['start_date'].' '.$_POST['start_time'],
-			$_POST['end_date'].' '.$_POST['end_time'],
-			$_POST['name']);
+		$event = new \Model\Event();
+		$event->setDescription($_POST['description']);
+		$event->setName($_POST['name']);
+		$event->setNotification($_POST['notification']);
+		$event->setEventTypeId($_POST['event_type']);
+		$event->setStartDate($_POST['start_date'].' '.$_POST['start_time']);
+		$event->setEndDate($_POST['end_date'].' '.$_POST['end_time']);
+		$event->setUserId(get_current_organizer_user()->getId());
+
 		if(new DateTime($_POST['start_date'].' '.$_POST['start_time'])>=
 			new DateTime($_POST['end_date'].' '.$_POST['end_time'])){
 			$errors = [];
 			$errors[] = 'Дата начала должна быть меньше даты конца';
 		}
 		else {
-			$GLOBALS['EventRepository']->insert($event);
+			$event->insert();
 			echo("<script>location.href = '" . generateUrl('events') . "';</script>");
 		}
 	}
@@ -36,7 +37,7 @@
 			<div class="form-group">
 				<label for="name" class = "control-label col-md-2">Название</label>
 				<div class="col-md-10">
-					<input type="text" id="name" name="name" class = "form-control" required value="<?php print get_value_for_form('name');?>">
+					<input type="text" id="name" name="name" class = "form-control" required value="<?= get_value_for_form('name');?>">
 				</div>
 			</div>
 
@@ -44,10 +45,10 @@
 				<label class = "control-label col-md-2" for="start_date">Дата начала: </label>
 				<div class="col-md-10">
 					<div class="col-md-9">
-						<input type="date" name="start_date" class = "form-control" id="start_date" value="<?php print get_value_for_form('start_date');?>" required>
+						<input type="date" name="start_date" class = "form-control" id="start_date" value="<?= get_value_for_form('start_date');?>" required>
 					</div>
 					<div class="col-md-3">
-						<input type="time" name="start_time" class="form-control" id="start_time" value="<?php print get_value_for_form('start_time');?>" required>
+						<input type="time" name="start_time" class="form-control" id="start_time" value="<?= get_value_for_form('start_time');?>" required>
 					</div>
 				</div>
 			</div>
@@ -56,10 +57,10 @@
 				<label class = "control-label col-md-2" for="end_date">Дата конца: </label>
 				<div class="col-md-10">
 					<div class="col-md-9">
-						<input type="date" name="end_date" class = "form-control" id="end_date" value="<?php print get_value_for_form('end_date');?>" required>
+						<input type="date" name="end_date" class = "form-control" id="end_date" value="<?= get_value_for_form('end_date');?>" required>
 					</div>
 					<div class="col-md-3">
-						<input type="time" name="end_time" class="form-control" id="end_time" value="<?php print get_value_for_form('end_time');?>" required>
+						<input type="time" name="end_time" class="form-control" id="end_time" value="<?= get_value_for_form('end_time');?>" required>
 					</div>
 				</div>
 			</div>
@@ -68,13 +69,13 @@
 				<label class = "control-label col-md-2" for="event_type"> Тип события: </label>
 				<div class="col-md-10">
 					<?php
-					$repo = $GLOBALS['EventTypeRepository'];
-					$types = $repo->get();
+					$eventType =new \Model\EventType();
+					$types = $eventType->get();
 					?>
 					<select class="form-control" id="event_type" name="event_type" required>
 						<?php foreach($types as $t):?>
-							<option value="<?php print $t->id; ?>" style="background-color: <?php print $t->color; ?>" >
-								<?php print $t->name; ?>
+							<option value="<?= $t->getId(); ?>" style="background-color: <?= $t->getColor(); ?>" >
+								<?= $t->getName(); ?>
 							</option>
 						<?php endforeach; ?>
 					</select>
@@ -84,7 +85,7 @@
 			<div class="form-group">
 				<label class="control-label col-md-2" for="description">Описание</label>
 				<div class="col-md-10">
-					<textarea class="form-control" name="description" id="description" required><?php print trim(get_value_for_form('description')); ?>
+					<textarea class="form-control" name="description" id="description" required><?= trim(get_value_for_form('description')); ?>
 					</textarea>
 				</div>
 			</div>
@@ -92,7 +93,7 @@
 			<div class="form-group">
 				<label class="control-label col-md-2" for="notification">Уведомление</label>
 				<div class="col-md-10">
-					<textarea class="form-control" name="notification" id="notification" required><?php print trim(get_value_for_form('notification')); ?>
+					<textarea class="form-control" name="notification" id="notification" required><?= trim(get_value_for_form('notification')); ?>
 					</textarea>
 				</div>
 			</div>

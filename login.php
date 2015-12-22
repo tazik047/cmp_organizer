@@ -6,8 +6,8 @@
 			$errors[] = "Поля не должны быть пустыми!";
 		}
 		if(count($errors)==0){
-			$errors = login($_POST['login'],$_POST['password']);
-			if(count($errors==0)) {
+			$errors = login($_POST['login'], $_POST['password']);
+			if(count($errors)==0) {
 				header("Location: " . generateGlobalUrl('index'));
 			}
 		}

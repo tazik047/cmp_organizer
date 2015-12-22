@@ -5,11 +5,14 @@
  * Date: 25.11.2015
  * Time: 23:02
  */
+
+use Model\Event;
+
  $AllowAnonymous = false;
  
 Include 'Logic/includes.php';
-$event_repo = $GLOBALS['EventRepository'];
-$event = $event_repo->getById($_GET['id']);
+$event = new Event();
+$event->getById($_GET['id']);
 ?>
  <hr />
  <dl class="dl-horizontal">
@@ -18,7 +21,7 @@ $event = $event_repo->getById($_GET['id']);
   </dt>
 
   <dd>
-   <?= $event->event_type->name; ?>
+   <?= $event->getEventType()->getName() ?>
   </dd>
 
   <dt>
@@ -26,7 +29,7 @@ $event = $event_repo->getById($_GET['id']);
   </dt>
 
   <dd>
-   <?= $event->description; ?>
+   <?= $event->getDescription(); ?>
   </dd>
 
   <dt>
@@ -34,24 +37,24 @@ $event = $event_repo->getById($_GET['id']);
   </dt>
 
   <dd>
-   <?= $event->notification; ?>
+   <?= $event->getNotification(); ?>
   </dd>
   <dt>
    Начало
   </dt>
 
   <dd>
-   <?= $event->startDate;?>
+   <?= $event->getStartDate();?>
   </dd>
   <dt>
    Конец
   </dt>
 
   <dd>
-   <?= $event->endDate;?>
+   <?= $event->getEndDate();?>
   </dd>
  </dl>
  <br />
- <a class="btn btn-block btn-default btn-success" href="<?= generateUrl('events','method=update&id='.$event->id); ?>">
+ <a class="btn btn-block btn-default btn-success" href="<?= generateUrl('events','method=update&id='.$event->getId()); ?>">
   Изменить событие
  </a>

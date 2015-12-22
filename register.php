@@ -1,22 +1,25 @@
  <?php
 	Include 'Logic/includes.php';
 	if($_POST){
-		$repo = $GLOBALS['UserRepository'];
-		$u = new User(0, $_POST['login'], $_POST['password']);
+		$u = new \Model\User();
+		$u->setEmail($_POST['login']);
+		$u->setPassword($_POST['password']);
+
 		$errors = [];
 		if(!preg_match("/^.+@.+\..+$/", $_POST['login']))	{
 			$errors[] = "Неверный email";
 		}
-		if(strlen($_POST['password']) < 6)	{
-			$errors[] = "Пароль должен быть больше 6 символов";
+		if(strlen($_POST['password']) < 6 &&strlen($_POST['password']) > 30)	{
+			$errors[] = "Пароль должен быть больше 6 символов, но меньше 30";
 		}
-		$us = $repo->getByEmail($u->email);		
-		if(isset($us)){
+		$us = new \Model\User();
+		$us->getByEmail($u->getEmail());
+		if(!$us->isEmpty()){
 			$errors[] = "Такой пользователь уже зарегистрирован";
 		}
 		if(count($errors)==0){
-			$repo->insert($u);
-			$errors = login();
+			$u->insert();
+			$errors = login($u->getEmail(), $u->getPassword());
 			if(count($errors)==0){
 				header("Location: ". generateGlobalUrl('index'));
 			}

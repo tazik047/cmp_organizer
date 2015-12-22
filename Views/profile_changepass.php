@@ -1,9 +1,8 @@
 <?php function RenderBody(){
 	if($_POST){
-		$repo = $GLOBALS['UserRepository'];
 		$u = get_current_organizer_user();
 		$errors = [];
-		if($u->password!=$_POST['old_password'])	{
+		if($u->getPassword()!=$_POST['old_password'])	{
 			$errors[] = "Вы указали неверный текущий пароль";
 		}		
 		if($_POST['new_password']!=$_POST['repeat_password'])	{
@@ -12,8 +11,9 @@
 		if(strlen($_POST['new_password']) < 6)	{
 			$errors[] = "Пароль должен быть больше 6 символов";
 		}
+		$u->setPassword($_POST['new_password']);
 		if(count($errors)==0){
-			$repo->update(new User($u->id, '', $_POST['new_password']));
+			$u->update();
 			if(count($errors)==0){
 				echo("<script>location.href = '".generateUrl('profile')."';</script>");
 			}
@@ -21,7 +21,7 @@
 	}
 
 	?>
-	<form enctype = "multipart/form-data" method="POST">
+	<form method="POST">
 		<div class="form-horizontal">
 			<hr />
 			<?php if(isset($errors)): ?>

@@ -43,7 +43,7 @@ class EventType extends BaseEntity
 		return isset($this->fields['Color'])?$this->fields['Color']:"";
 	}
 	
-	public function setName($color){
+	public function setColor($color){
 		$this->fields['Color'] = $color;
 	}
 	
@@ -51,6 +51,29 @@ class EventType extends BaseEntity
         parent::__construct();
         $this->idColumnName = "EventTypeId";
         $this->tableName = "eventtype";
+    }
+
+    public function get(){
+        $res = parent::get();
+        $eventTypes = [];
+        foreach($res as $e){
+            $i = new EventType();
+            $i->fields = $e;
+            $eventTypes[] = $i;
+        }
+        return $eventTypes;
+    }
+
+    public function getByUserId($id){
+        $res = $this->db->query("SELECT * FROM eventtype where UserId = ".$id);
+        if(count($res)==0) return null;
+        $eventTypes = [];
+        foreach($res as $e){
+            $i = new EventType();
+            $i->fields = $e;
+            $eventTypes[] = $i;
+        }
+        return $eventTypes;
     }
 	
     /*public function __construct($id, $user, $name, $color){

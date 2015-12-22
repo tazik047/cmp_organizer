@@ -5,11 +5,15 @@
  * Date: 25.11.2015
  * Time: 23:02
  */
+
+use Model\Event;
+use Model\EventViewModel;
+
 Include 'Logic/includes.php';
 isAuthorized();
 $user = get_current_organizer_user();
 $event = new Event();
-$notifications = $event_repo->getCurrentNotification(get_current_organizer_user()->id, (new DateTime())->format('Y-m-d H:i:s'));
+$notifications = $event->getCurrentNotification($user->getId(),(new DateTime())->format('Y-m-d H:i'));
 if(count($notifications)!=0):?>
  <a href="<?= generateUrl('events')?>">
   <ul class="list-group">

@@ -7,10 +7,10 @@
  */
 Include 'Logic/includes.php';
 isAuthorized();
-$repo = $GLOBALS['EventRepository'];
-$events = $repo->getByUserId(get_current_organizer_user()->id);
+$event = new \Model\Event();
+$events = $event->getByUserId(get_current_organizer_user()->getId());
 $eventsRes = [];
 foreach($events as $e){
- $eventsRes[] = new EventViewModel($e->id,$e->name,$e->event_type->color,$e->startDate,$e->endDate);
+ $eventsRes[] = new \Model\EventViewModel($e->getId(),$e->getName(),$e->getEventType()->getColor(),$e->getStartDate(),$e->getEndDate());
 }
 print json_encode($eventsRes, JSON_UNESCAPED_UNICODE);

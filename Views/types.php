@@ -1,8 +1,8 @@
 <?php function RenderBody(){?>
 	<h2>Мои типы событий</h2>
 	<?php
-	$repo = $GLOBALS['EventTypeRepository'];
-	$types = $repo->getByUserId(get_current_organizer_user()->id);
+	$eventType = new \Model\EventType();
+	$types = $eventType->getByUserId(get_current_organizer_user()->getId());
 	if(count($types)==0){
 		print 'Вы еще не создали ни одного типа события';
 	}
@@ -29,8 +29,8 @@
 					<td style="
 						text-align: center;
 						vertical-align: middle;
-					"><?= $t->name; ?></td>
-					<td><div class="color-block" style="background-color: <?= $t->color; ?>"></div></td>
+					"><?= $t->getName(); ?></td>
+					<td><div class="color-block" style="background-color: <?= $t->getColor(); ?>"></div></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
