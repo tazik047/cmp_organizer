@@ -39,7 +39,7 @@
 <?php }
 function get_value_for_form($name)
 {
-	return isset($_POST[$name]) ? $_POST[$name] : "#000000";
+	return isset($_POST[$name]) ? $_POST[$name] : ($name=="color"?"#000000":"");
 }
 
 ?>
