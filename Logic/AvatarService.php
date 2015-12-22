@@ -16,13 +16,12 @@ function upload_avatar($repo){
 
 function get_avatar(){
 	$user = get_current_organizer_user();
-	$repo = $GLOBALS['UserRepository'];
-	$type = $repo->getAvatarType($user->id);
-	if($type==null){
+	$type = $user->getAvatarType();
+	if($type==""){
 		$type ="image/jpeg";
 	}
 	header("Content-type: $type");
-	$path = get_file_name_for_avatar($user->email);
+	$path = get_file_name_for_avatar($user->getEmail());
 	if(!file_exists($path)){
 		$path = get_file_name_for_avatar("default.jpg");
 	}

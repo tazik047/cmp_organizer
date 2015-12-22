@@ -38,21 +38,21 @@
 			<div class="form-group">
 				<label class = "control-label col-md-2" for="firstName">Имя: </label>
 				<div class="col-md-10">
-					<input type="text" name="firstName" class = "form-control" id="firstName" value="<?php print $u->firstName; ?>" required>
+					<input type="text" name="firstName" class = "form-control" id="firstName" value="<?= $u->firstName; ?>" required>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class = "control-label col-md-2" for="surname">Фамилия: </label>
 				<div class="col-md-10">
-					<input type="text" name="surname" class = "form-control" id="surname" value="<?php print $u->surname; ?>" required>
+					<input type="text" name="surname" class = "form-control" id="surname" value="<?= $u->surname; ?>" required>
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<label id="avatar" class="control-label col-md-2">Аватар</label>
 				<div class="col-md-10">
-					<img width="150" src="<?php print generateUrl('avatar'); ?>" />
+					<img width="150" src="<?= generateUrl('avatar'); ?>" />
 					<div>
 						Загрузить новое изображение:
 						<input type="file" name="avatar" class="form-control" accept="image/*" />

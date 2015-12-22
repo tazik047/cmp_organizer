@@ -24,15 +24,17 @@ class BaseEntity
     }
 
     public function isEmpty(){
-        return count($this->fields);
+        /*print count($this->fields);
+        die();*/
+        return count($this->fields)==0;
     }
 
     public function get(){
-        $this->fields = $this->db->queryWithoutResult("Select * from `$this->tableName`");
+        $this->fields = $this->db->query("Select * from `$this->tableName`");
     }
 
     public function getById($id){
-        $res = $this->db->queryWithoutResult("Select * from `$this->tableName` where $this->idColumnName = $id");
+        $res = $this->db->query("Select * from `$this->tableName` where $this->idColumnName = $id");
         if(count($res)!=0){
             $this->fields = $res[0];
         }

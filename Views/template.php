@@ -67,7 +67,7 @@
               	  <p class="centered"><a href="<?php print generateUrl('profile'); ?>"><img src="<?php print generateUrl('avatar'); ?>" class="img-circle" width="60"></a></p>
               	  <h5 class="centered"><?php
                       $user = get_current_organizer_user();
-                      print $user->firstName==null?$user->email:($user->surname.' '.$user->firstName);
+                      print $user->getFirstName()==""?$user->getEmail():($user->getSurname().' '.$user->getFirstName());
                       ?></h5>
 
                   <li class="mt">
@@ -83,8 +83,8 @@
                           <span>Мои типы событий</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="<?php print generateUrl('eventtypes'); ?>">Просмотреть</a></li>
-                          <li><a  href="<?php print generateUrl('eventtypes','method=create'); ?>">Создать</a></li>
+                          <li><a  href="<?= generateUrl('eventtypes'); ?>">Просмотреть</a></li>
+                          <li><a  href="<?= generateUrl('eventtypes','method=create'); ?>">Создать</a></li>
                       </ul>
                   </li>
 
@@ -94,8 +94,8 @@
                           <span>Календарь</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="<?php print generateUrl('events')?>">Предстоящие события</a></li>
-                          <li><a  href="<?php print generateUrl('events','method=add')?>">Добавить событие</a></li>
+                          <li><a  href="<?= generateUrl('events')?>">Предстоящие события</a></li>
+                          <li><a  href="<?= generateUrl('events','method=add')?>">Добавить событие</a></li>
                       </ul>
                   </li>
               </ul>
@@ -152,7 +152,7 @@
     <script type="text/javascript" src="/Views/assets/js/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="/Views/assets/js/gritter-conf.js"></script>
 
-  <?php  print $scripts; ?>
+  <?= $scripts; ?>
 
 	<script type="text/javascript">
     $(document).ready(function () {

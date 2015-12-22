@@ -62,10 +62,8 @@ class User extends BaseEntity
         }
     }
 
-    public function getAvatarType($id){
-        $res = $this->db->query('SELECT `Content_type` FROM user where UserId = '.$id);
-        if(count($res)==0) return null;
-        return $res[0]['Content_type'];
+    public function getAvatarType(){
+        return isset($this->fields['Content_type'])?$this->fields['Content_type']:"";
     }
 
     public function updateProfile($user){

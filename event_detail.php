@@ -18,7 +18,7 @@ $event = $event_repo->getById($_GET['id']);
   </dt>
 
   <dd>
-   <?php print $event->event_type->name; ?>
+   <?= $event->event_type->name; ?>
   </dd>
 
   <dt>
@@ -26,7 +26,7 @@ $event = $event_repo->getById($_GET['id']);
   </dt>
 
   <dd>
-   <?php print $event->description; ?>
+   <?= $event->description; ?>
   </dd>
 
   <dt>
@@ -34,24 +34,24 @@ $event = $event_repo->getById($_GET['id']);
   </dt>
 
   <dd>
-   <?php print $event->notification; ?>
+   <?= $event->notification; ?>
   </dd>
   <dt>
    Начало
   </dt>
 
   <dd>
-   <?php print $event->startDate;?>
+   <?= $event->startDate;?>
   </dd>
   <dt>
    Конец
   </dt>
 
   <dd>
-   <?php print $event->endDate;?>
+   <?= $event->endDate;?>
   </dd>
  </dl>
  <br />
- <a class="btn btn-block btn-default btn-success" href="<?php print generateUrl('events','method=update&id='.$event->id); ?>">
+ <a class="btn btn-block btn-default btn-success" href="<?= generateUrl('events','method=update&id='.$event->id); ?>">
   Изменить событие
  </a>

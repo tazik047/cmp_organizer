@@ -11,7 +11,6 @@ function generateGlobalUrl($page)
 }
 
 function __autoload($class_name) {
-	print "<div>$class_name</div>";
 	include $class_name . '.php';
 }
 

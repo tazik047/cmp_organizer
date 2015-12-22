@@ -29,8 +29,8 @@
 					<td style="
 						text-align: center;
 						vertical-align: middle;
-					"><?php print $t->name; ?></td>
-					<td><div class="color-block" style="background-color: <?php print $t->color; ?>"></div></td>
+					"><?= $t->name; ?></td>
+					<td><div class="color-block" style="background-color: <?= $t->color; ?>"></div></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>

@@ -5,9 +5,8 @@
  * Date: 25.11.2015
  * Time: 23:02
  */
- $AllowAnonymous = false;
- 
 Include 'Logic/includes.php';
+isAuthorized();
 $repo = $GLOBALS['EventRepository'];
 $events = $repo->getByUserId(get_current_organizer_user()->id);
 $eventsRes = [];

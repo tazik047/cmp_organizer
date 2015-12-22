@@ -19,12 +19,10 @@ function login($login, $password){
 	$error = array();
 	$user = new User();
 	$user->getByEmail($login);
-	print '<pre>';
-	print_r($user);
-	die();
 	if (!$user->isEmpty()) {
 		if ($user->getPassword()==$password)	{
-			$_SESSION['userId'] = $user->id;
+			$_SESSION['userId'] = $user->getId();
+			print_r($_SESSION);
 			return $error;
 		}
 		else {

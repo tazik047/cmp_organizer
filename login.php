@@ -1,6 +1,6 @@
  <?php
 	Include 'Logic/includes.php';
-	if($_POST){
+ 	if($_POST){
 		$errors = array();
 		if (!isset($_POST['login']) || $_POST['login']=="" || !isset($_POST['password']) || $_POST['password']=="") {
 			$errors[] = "Поля не должны быть пустыми!";

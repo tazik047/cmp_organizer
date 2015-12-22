@@ -1,5 +1,4 @@
  <?php
-	$AllowAnonymous = true;
 	Include 'Logic/includes.php';
 	if($_POST){
 		$repo = $GLOBALS['UserRepository'];
