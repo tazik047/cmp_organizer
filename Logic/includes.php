@@ -11,7 +11,7 @@ function generateGlobalUrl($page)
 }
 
 function __autoload($class_name) {
-	include $class_name . '.php';
+	include $_SERVER['DOCUMENT_ROOT'].'/'.str_replace('\\', '/', $class_name) . '.php';
 }
 
 Include 'Logic/authorize.php';
